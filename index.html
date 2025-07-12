@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Coderstar</title>
+  <title>The Coder's Journey</title>
   <style>
     * { box-sizing: border-box; }
 
@@ -45,6 +45,7 @@
     .neon-typing {
       color: var(--neon-yellow);
       text-shadow: var(--neon-shadow-yellow);
+      line-height: 1.4;
     }
 
     .page {
@@ -99,12 +100,30 @@
 
     .cover {
       background: radial-gradient(circle farthest-corner at 80% 20%, hsl(150 80% 20% / .3) 0%, hsl(170 60% 10% / .1) 100%),
-      hsl(231, 32%, 29%) url("https://raw.githubusercontent.com/CodeCr4cker/book-flip/main/img/front.jpg") 50% / cover;
+      hsl(231, 32%, 29%) url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop") 50% / cover;
       color: hsl(200 30% 98%);
       pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     .cover::after { content: ""; }
+
+    .cover-title {
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      margin: 0;
+    }
+
+    .cover-subtitle {
+      font-size: 1.2em;
+      margin-top: 0.5em;
+      font-style: italic;
+      opacity: 0.9;
+    }
 
     h1 {
       font-size: 1.8em;
@@ -129,15 +148,15 @@
       top: 1em;
       left: 50%;
       transform: translateX(-50%);
-    /*  width: 220px;
-      height: 220px; */
+      width: 120px;
+      height: 120px;
       perspective: 500px;
       z-index: 10;
     }
 
     .page-image {
-      width: 220px;
-      height: 220px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       box-shadow: 0 15px 40px rgba(0,0,0,0.3);
       opacity: 0;
@@ -175,6 +194,38 @@
       margin-top: 0;
     }
 
+    /* Audio control styles */
+    .audio-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .audio-controls button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      margin: 0 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .audio-controls button:hover {
+      background: #0056b3;
+    }
+
+    .audio-controls button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 768px) {
       body {
         font-size: 0.9rem;
@@ -208,33 +259,49 @@
       .page-content {
         padding-top: 100px;
       }
+
+      .audio-controls {
+        top: 10px;
+        right: 10px;
+        padding: 8px;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="audio-controls">
+    <button id="muteBtn">🔊</button>
+    <button id="speedBtn">1x</button>
+  </div>
+
   <div class="book">
     <div class="page">
       <div class="front cover">
-           </div>
+        <div>
+          <h1 class="cover-title">The Digital Dreamer</h1>
+          <p class="cover-subtitle">A Journey Through Code and Creativity</p>
+        </div>
+      </div>
       <div class="back"></div>
     </div>
 
     <div class="page">
       <div class="front">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Profile" class="page-image" id="img1">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Young dreamer" class="page-image" id="img1">
         </div>
         <div class="page-content">
-          <h2><span id="type1" class="neon-typing"></span></h2>
+          <h2>Chapter 1: The Spark Ignites</h2>
+          <p><span id="type1" class="neon-typing"></span></p>
         </div>
       </div>
       <div class="back">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Student coding" class="page-image" id="img2">
+          <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=150&h=150&fit=crop" alt="First computer" class="page-image" id="img2">
         </div>
         <div class="page-content">
-          <h2>my introduction</h2>
-          <h2><span id="type2" class="neon-typing"></span></h2>
+          <h2>Chapter 2: The First Discovery</h2>
+          <p><span id="type2" class="neon-typing"></span></p>
         </div>
       </div>
     </div>
@@ -242,20 +309,20 @@
     <div class="page">
       <div class="front">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Coding passion" class="page-image" id="img3">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=150&h=150&fit=crop" alt="Learning to code" class="page-image" id="img3">
         </div>
         <div class="page-content">
-          <h2>Why I Code 💻</h2>
-          <h2><span id="type3" class="neon-typing"></span></h2>
+          <h2>Chapter 3: The Learning Begins</h2>
+          <p><span id="type3" class="neon-typing"></span></p>
         </div>
       </div>
       <div class="back">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Tech skills" class="page-image" id="img4">
+          <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=150&h=150&fit=crop" alt="Skills growing" class="page-image" id="img4">
         </div>
         <div class="page-content">
-          <h2>What I Know 🧠</h2>
-          <h2><span id="type4" class="neon-typing"></span></h2>
+          <h2>Chapter 4: The Skills Awaken</h2>
+          <p><span id="type4" class="neon-typing"></span></p>
         </div>
       </div>
     </div>
@@ -263,20 +330,20 @@
     <div class="page">
       <div class="front">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Future vision" class="page-image" id="img5">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=150&h=150&fit=crop" alt="Future vision" class="page-image" id="img5">
         </div>
         <div class="page-content">
-          <h2>My Vision 🚀</h2>
-          <h2><span id="type5" class="neon-typing"></span></h2>
+          <h2>Chapter 5: The Vision Forms</h2>
+          <p><span id="type5" class="neon-typing"></span></p>
         </div>
       </div>
       <div class="back">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Collaboration" class="page-image" id="img6">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=150&h=150&fit=crop" alt="Collaboration" class="page-image" id="img6">
         </div>
         <div class="page-content">
-          <h2>Let's Connect! 🤝</h2>
-          <h2><span id="type6" class="neon-typing"></span></h2>
+          <h2>Chapter 6: The Network Expands</h2>
+          <p><span id="type6" class="neon-typing"></span></p>
         </div>
       </div>
     </div>
@@ -284,37 +351,73 @@
     <div class="page">
       <div class="front">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Learning" class="page-image" id="img7">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=150&h=150&fit=crop" alt="Continuous learning" class="page-image" id="img7">
         </div>
         <div class="page-content">
-          <h2>Learning Philosophy</h2>
-          <h2><span id="type7" class="neon-typing"></span></h2>
+          <h2>Chapter 7: The Wisdom Grows</h2>
+          <p><span id="type7" class="neon-typing"></span></p>
         </div>
       </div>
       <div class="back">
         <div class="page-image-container">
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Gratitude" class="page-image" id="img8">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop" alt="Success celebration" class="page-image" id="img8">
         </div>
         <div class="page-content">
-          <h2>Thank You for Being Here 🙏</h2>
-          <h2><span id="type8" class="neon-typing"></span></h2>
+          <h2>Chapter 8: The Journey Continues</h2>
+          <p><span id="type8" class="neon-typing"></span></p>
         </div>
       </div>
     </div>
 
     <div class="page">
       <div class="front"></div>
-      <div class="back cover"></div>
+      <div class="back cover">
+        <div style="text-align: center; color: white;">
+          <h2>The End... Or Is It?</h2>
+          <p>Every ending is a new beginning.</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
     let globalClicked = false;
+    let audioEnabled = true;
+    let speechRate = 0.9;
+    let currentUtterance = null;
+    let isTyping = false;
 
     document.addEventListener("DOMContentLoaded", () => {
       const elBook = document.querySelector(".book");
       flipBook(elBook);
+      initAudioControls();
     });
+
+    function initAudioControls() {
+      const muteBtn = document.getElementById('muteBtn');
+      const speedBtn = document.getElementById('speedBtn');
+
+      muteBtn.addEventListener('click', () => {
+        audioEnabled = !audioEnabled;
+        muteBtn.textContent = audioEnabled ? '🔊' : '🔇';
+        if (!audioEnabled && currentUtterance) {
+          speechSynthesis.cancel();
+        }
+      });
+
+      speedBtn.addEventListener('click', () => {
+        if (speechRate === 0.9) {
+          speechRate = 1.0;
+          speedBtn.textContent = '1x';
+        } else if (speechRate === 1.0) {
+          speechRate = 1.2;
+          speedBtn.textContent = '1.2x';
+        } else {
+          speechRate = 0.9;
+          speedBtn.textContent = '0.9x';
+        }
+      });
+    }
 
     function flipBook(elBook) {
       elBook.style.setProperty("--c", 0);
@@ -331,7 +434,10 @@
 
       window.resetBook = () => {
         globalClicked = false;
+        isTyping = false;
         elBook.style.setProperty("--c", 0);
+        speechSynthesis.cancel();
+        currentUtterance = null;
         document.querySelectorAll('.neon-typing').forEach(el => el.innerHTML = '');
         document.querySelectorAll('.page-content').forEach(content => content.classList.remove('animate-in'));
         document.querySelectorAll('.page-image').forEach(img => {
@@ -345,39 +451,32 @@
       {
         front: "#type1",
         back: "#type2",
-        frontText: ` Jay Shree Ram`,
-        backText: ` I'm a 12th standard student who's deeply passionate about coding and creativity.
-          My journey in tech started with curiosity and grew into a strong desire to build, solve, and innovate. 
-          I love spending time exploring new web technologies and turning ideas into interactive digital experiences. `,
+        frontText: "यह वेबसाइट दिव्यांशु पांडे द्वारा बनाई गई है जिन्होंने HTML CSS और JS का उपयोग किया है .",
+        backText: "That first program was simple—just a few lines that made the computer say 'Hello, World!' But to Alex, it was like witnessing the birth of a star. The computer had listened, understood, and responded. It was the beginning of a conversation that would change everything. From that moment, Alex knew that coding wasn't just about writing instructions—it was about bringing imagination to life, one line at a time.",
         frontImage: "#img1",
         backImage: "#img2"
       },
       {
         front: "#type3",
         back: "#type4",
-        frontText: ` For me, coding is not just about writing lines of code—it's about building a bridge between imagination and reality. 
-          Whether it's a portfolio website, a flipbook animation, or a full-fledged chat app, I enjoy every part of the process—from designing UI to writing functional backend logic.`,
-        backText: ` I have hands-on experience in HTML, CSS, JavaScript, Firebase, and responsive UI design. 
-          I've built projects that include animated portfolios, flipbook-style interfaces, chat apps with real-time features, and creative tools that reflect my interest in design and interactivity.`,
+        frontText: "Days turned into weeks, and weeks into months. Alex spent countless hours in front of the screen, learning the language of machines. HTML became poetry, CSS became art, and JavaScript became magic. Each new concept was like discovering a new color in an artist's palette. The more Alex learned, the more beautiful the digital canvas became.",
+        backText: "Soon, Alex's skills began to bloom like flowers in spring. HTML laid the foundation like strong roots, CSS painted the world in vibrant colors, and JavaScript breathed life into static pages. Firebase became the bridge between dreams and reality, allowing creations to live and breathe in the cloud. Each project was a stepping stone across the river of knowledge, leading to greater adventures ahead.",
         frontImage: "#img3",
         backImage: "#img4"
       },
       {
         front: "#type5",
         back: "#type6",
-        frontText: ` My goal is to become a full-stack developer and explore fields like cybersecurity, artificial intelligence, and ethical hacking. 
-          I believe technology can change the world—and I want to be part of that change. I constantly challenge myself to learn more, build better, and keep growing.`,
-        backText: `I love collaborating with other developers, learning from others, and contributing to fun, meaningful projects.
-          If you're someone who shares a love for tech, design, or innovation, let's connect and build something amazing together!`,
+        frontText: "One quiet evening, as Alex gazed at the code glowing on the screen, a vision formed in the mind's eye. It wasn't just about building websites or apps—it was about creating solutions that could touch lives, solve problems, and make the world a little bit better. The dream expanded beyond personal success to encompass cybersecurity, artificial intelligence, and ethical hacking—tools to protect and empower others.",
+        backText: "But Alex knew that the greatest adventures are shared ones. The coding community became a second family—developers from around the world who spoke the same language of logic and creativity. Through forums, open-source projects, and collaborative efforts, Alex discovered that the most beautiful code is written not in isolation, but in harmony with others who share the same passion for building the future.",
         frontImage: "#img5",
         backImage: "#img6"
       },
       {
         front: "#type7",
         back: "#type8",
-        frontText: `I believe in learning by doing. I don't wait for the perfect time or course—I dive into projects, break things, fix them, and learn along the way.`,
-        backText: `Your time means a lot to me. Feel free to explore my projects, drop a message, or give feedback. 
-          Every interaction helps me improve and grow.`,
+        frontText: "Through trial and error, success and failure, Alex learned the most important lesson of all: the journey of learning never ends. Each bug was a puzzle to solve, each error message a teacher in disguise. The philosophy became clear—embrace the unknown, dive into challenges headfirst, and never stop asking 'What if?' because the greatest discoveries come from the courage to explore uncharted territories.",
+        backText: "And so, dear reader, as you reach the end of this chapter, remember that every expert was once a beginner, every master was once a student, and every great achievement started with a single step. Alex's story continues to unfold, filled with new challenges, discoveries, and dreams yet to be realized. The keyboard awaits, the screen glows with potential, and the next adventure is just a click away. Thank you for joining this journey—may your own story be filled with code, creativity, and endless possibilities.",
         frontImage: "#img7",
         backImage: "#img8"
       }
@@ -406,104 +505,103 @@
       });
     }
 
-    function typeText(el, text, callback) {
-      let i = 0;
+    // Enhanced Text-to-Speech with simultaneous typing
+    function speakText(text, onWordSpoken) {
+      if (!audioEnabled || !('speechSynthesis' in window)) return Promise.resolve();
+
+      return new Promise((resolve) => {
+        speechSynthesis.cancel();
+        
+        // Clean the text for better pronunciation
+        const cleanText = text
+          .replace(/[^\w\s.,!?;:'-]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        if (cleanText.length === 0) {
+          resolve();
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(cleanText);
+        utterance.lang = 'en-US';
+        utterance.rate = speechRate;
+        utterance.pitch = 1.1;
+        utterance.volume = 0.8;
+        
+        let wordIndex = 0;
+        const words = cleanText.split(' ');
+        
+        // Create a more natural word-by-word synchronization
+        utterance.onboundary = (event) => {
+          if (event.name === 'word' && wordIndex < words.length && onWordSpoken) {
+            onWordSpoken(wordIndex);
+            wordIndex++;
+          }
+        };
+        
+        utterance.onend = () => {
+          currentUtterance = null;
+          resolve();
+        };
+        
+        utterance.onerror = (error) => {
+          console.log('Speech error:', error);
+          currentUtterance = null;
+          resolve();
+        };
+
+        currentUtterance = utterance;
+        speechSynthesis.speak(utterance);
+      });
+    }
+
+    // Enhanced typing with speech synchronization
+    async function typeTextWithSpeech(el, text, callback) {
+      if (!audioEnabled) {
+        // If audio is disabled, just type normally
+        return typeText(el, text, callback);
+      }
+
+      isTyping = true;
       el.innerHTML = "";
-      function typeChar() {
-        if (i < text.length) {
-          el.innerHTML += text[i++];
-          setTimeout(typeChar, 30);
-        } else {
-          callback && callback();
-        }
-      }
-      typeChar();
-    }
-
-    function startTypingSequence(elBook) {
-      let currentPage = 0;
-
-      function processPage() {
-        if (currentPage >= typingPages.length) return;
-
-        const { front, back, frontText, backText, frontImage, backImage } = typingPages[currentPage];
-        const frontEl = document.querySelector(front);
-        const backEl = document.querySelector(back);
-        const frontContent = frontEl.closest('.front').querySelector('.page-content');
-        const backContent = backEl.closest('.back').querySelector('.page-content');
-
-        setTimeout(() => {
-          frontContent.classList.add('animate-in');
-          setTimeout(() => {
-            // Show front image when page loads
-            if (frontImage) {
-              setTimeout(() => showImage(frontImage), 200);
-            }
-            
-            typeText(frontEl, frontText, () => {
-              setTimeout(() => {
-                // Hide front image before page turn
-                if (frontImage) hideImage(frontImage);
-                
-                setTimeout(() => {
-                  elBook.style.setProperty("--c", currentPage + 2);
-                  setTimeout(() => {
-                    backContent.classList.add('animate-in');
-                    setTimeout(() => {
-                      // Show back image when page loads
-                      if (backImage) {
-                        setTimeout(() => showImage(backImage), 200);
-                      }
-                      
-                      typeText(backEl, backText, () => {
-                        setTimeout(() => {
-                          // Hide back image before next page
-                          if (backImage) hideImage(backImage);
-                          
-                          setTimeout(() => {
-                            currentPage++;
-                            if (currentPage < typingPages.length) {
-                              elBook.style.setProperty("--c", currentPage + 1);
-                              setTimeout(processPage, 1000);
-                            } else {
-                              elBook.style.setProperty("--c", 5);
-                              setTimeout(() => {
-                                closeAndResetBook(elBook);
-                              }, 3000);
-                            }
-                          }, 1000);
-                        }, 2000);
-                      });
-                    }, 300);
-                  }, 1000);
-                }, 500);
-              }, 1000);
-            });
-          }, 300);
-        }, 500);
-      }
-
-      processPage();
-    }
-
-    function closeAndResetBook(elBook) {
-      // Hide all images before closing
-      hideAllImages();
       
-      let currentC = parseInt(elBook.style.getPropertyValue("--c")) || 5;
-      function closePage() {
-        if (currentC > 0) {
-          currentC--;
-          elBook.style.setProperty("--c", currentC);
-          setTimeout(closePage, 400);
-        } else {
-          setTimeout(() => {
-            window.resetBook();
-          }, 500);
+      const words = text.split(' ');
+      let currentWordIndex = 0;
+      let currentCharIndex = 0;
+      
+      // Start speech
+      const speechPromise = speakText(text, (spokenWordIndex) => {
+        // Sync typing with speech
+        if (spokenWordIndex < words.length && isTyping) {
+          const targetIndex = words.slice(0, spokenWordIndex + 1).join(' ').length;
+          while (currentCharIndex < targetIndex && currentCharIndex < text.length && isTyping) {
+            setTimeout(() => {
+              if (isTyping && currentCharIndex < text.length) {
+                el.innerHTML = text.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+              }
+            }, 20);
+          }
         }
-      }
-      closePage();
-    }
-  </script>
-</body>
-</html>
+      });
+
+      // Fallback typing in case speech events don't fire
+      const typingInterval = setInterval(() => {
+        if (!isTyping || currentCharIndex >= text.length) {
+          clearInterval(typingInterval);
+          return;
+        }
+        
+        if (currentCharIndex < text.length) {
+          el.innerHTML = text.substring(0, currentCharIndex + 1);
+          currentCharIndex++;
+        }
+      }, 50);
+
+      // Wait for speech to complete
+      await speechPromise;
+      clearInterval(typingInterval);
+      
+      // Ensure all text is displayed
+      if (isTyping)
