@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -76,7 +76,7 @@
       background-color: #fff;
       display: flex;
       flex-flow: column wrap;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 2em;
       border: 1px solid #0002;
     }
@@ -109,11 +109,13 @@
     h1 {
       font-size: 1.8em;
       margin: 0.5em 0;
+      text-align: center;
     }
 
     h2 {
       font-size: 1.3em;
       margin: 0.4em 0;
+      text-align: center;
     }
 
     p {
@@ -121,109 +123,56 @@
       margin: 0.4em 0;
     }
 
-    /* Dynamic Image Styles */
-    .page-image {
+    /* 3D Rotating Image Styles */
+    .page-image-container {
       position: absolute;
-      top: 50%;
+      top: 1em;
       left: 50%;
-      width: 100px;
-      height: 100px;
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
-      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      perspective: 500px;
       z-index: 10;
+    }
+
+    .page-image {
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      pointer-events: none;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: scale(0) rotateY(0deg);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+      object-fit: cover;
     }
 
     .page-image.show {
-      transform: translate(-50%, -50%) scale(1);
       opacity: 1;
+      transform: scale(1) rotateY(0deg);
+      animation: rotate3D 4s linear infinite;
     }
 
     .page-image.hide {
-      transform: translate(-50%, -50%) scale(0) rotate(180deg);
       opacity: 0;
+      transform: scale(0) rotateY(180deg);
     }
 
-    /* Specific image positioning for different pages */
-    .page-image.intro-img {
-      top: 20%;
-      right: 10%;
-      left: auto;
-      transform: translate(0, -50%) scale(0);
+    @keyframes rotate3D {
+      0% { transform: scale(1) rotateY(0deg) rotateX(0deg); }
+      25% { transform: scale(1) rotateY(90deg) rotateX(5deg); }
+      50% { transform: scale(1) rotateY(180deg) rotateX(0deg); }
+      75% { transform: scale(1) rotateY(270deg) rotateX(-5deg); }
+      100% { transform: scale(1) rotateY(360deg) rotateX(0deg); }
     }
 
-    .page-image.intro-img.show {
-      transform: translate(0, -50%) scale(1);
+    /* Content spacing to accommodate top image */
+    .page-content {
+      padding-top: 140px;
     }
 
-    .page-image.intro-img.hide {
-      transform: translate(0, -50%) scale(0) rotate(-180deg);
-    }
-
-    .page-image.code-img {
-      top: 70%;
-      left: 20%;
-      transform: translate(-50%, -50%) scale(0);
-    }
-
-    .page-image.code-img.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .page-image.skills-img {
-      top: 30%;
-      right: 15%;
-      left: auto;
-      transform: translate(0, -50%) scale(0);
-    }
-
-    .page-image.skills-img.show {
-      transform: translate(0, -50%) scale(1);
-    }
-
-    .page-image.vision-img {
-      top: 60%;
-      left: 15%;
-      transform: translate(-50%, -50%) scale(0);
-    }
-
-    .page-image.vision-img.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .page-image.connect-img {
-      top: 25%;
-      right: 20%;
-      left: auto;
-      transform: translate(0, -50%) scale(0);
-    }
-
-    .page-image.connect-img.show {
-      transform: translate(0, -50%) scale(1);
-    }
-
-    .page-image.learn-img {
-      top: 40%;
-      left: 25%;
-      transform: translate(-50%, -50%) scale(0);
-    }
-
-    .page-image.learn-img.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .page-image.thanks-img {
-      top: 65%;
-      right: 25%;
-      left: auto;
-      transform: translate(0, -50%) scale(0);
-    }
-
-    .page-image.thanks-img.show {
-      transform: translate(0, -50%) scale(1);
+    .page-content h2:first-child {
+      margin-top: 0;
     }
 
     @media (max-width: 768px) {
@@ -246,13 +195,18 @@
       p {
         font-size: 0.85em;
       }
+      
       .book {
         height: 200px;
       }
 
-      .page-image {
-        width: 60px;
-        height: 60px;
+      .page-image-container {
+        width: 80px;
+        height: 80px;
+      }
+
+      .page-content {
+        padding-top: 100px;
       }
     }
   </style>
@@ -267,67 +221,83 @@
 
     <div class="page">
       <div class="front">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Profile" class="page-image" id="img1">
+        </div>
         <div class="page-content">
           <h2><span id="type1" class="neon-typing"></span></h2>
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Profile" class="page-image intro-img" id="img1">
         </div>
       </div>
       <div class="back">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Student coding" class="page-image" id="img2">
+        </div>
         <div class="page-content">
           <h2>my introduction</h2>
           <h2><span id="type2" class="neon-typing"></span></h2>
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Student coding" class="page-image code-img" id="img2">
         </div>
       </div>
     </div>
 
     <div class="page">
       <div class="front">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Coding passion" class="page-image" id="img3">
+        </div>
         <div class="page-content">
           <h2>Why I Code 💻</h2>
           <h2><span id="type3" class="neon-typing"></span></h2>
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Coding passion" class="page-image code-img" id="img3">
         </div>
       </div>
       <div class="back">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Tech skills" class="page-image" id="img4">
+        </div>
         <div class="page-content">
           <h2>What I Know 🧠</h2>
           <h2><span id="type4" class="neon-typing"></span></h2>
-          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Tech skills" class="page-image skills-img" id="img4">
         </div>
       </div>
     </div>
 
     <div class="page">
       <div class="front">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Future vision" class="page-image" id="img5">
+        </div>
         <div class="page-content">
           <h2>My Vision 🚀</h2>
           <h2><span id="type5" class="neon-typing"></span></h2>
-          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=150&h=150&fit=crop" alt="Future vision" class="page-image vision-img" id="img5">
         </div>
       </div>
       <div class="back">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Collaboration" class="page-image" id="img6">
+        </div>
         <div class="page-content">
           <h2>Let's Connect! 🤝</h2>
           <h2><span id="type6" class="neon-typing"></span></h2>
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=150&h=150&fit=crop" alt="Collaboration" class="page-image connect-img" id="img6">
         </div>
       </div>
     </div>
 
     <div class="page">
       <div class="front">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Learning" class="page-image" id="img7">
+        </div>
         <div class="page-content">
           <h2>Learning Philosophy</h2>
           <h2><span id="type7" class="neon-typing"></span></h2>
-          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=150&h=150&fit=crop" alt="Learning" class="page-image learn-img" id="img7">
         </div>
       </div>
       <div class="back">
+        <div class="page-image-container">
+          <img src="https://raw.githubusercontent.com/CodeCr4cker/magical-door/main/data/arrow.png" alt="Gratitude" class="page-image" id="img8">
+        </div>
         <div class="page-content">
           <h2>Thank You for Being Here 🙏</h2>
           <h2><span id="type8" class="neon-typing"></span></h2>
-          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=150&h=150&fit=crop" alt="Gratitude" class="page-image thanks-img" id="img8">
         </div>
       </div>
     </div>
@@ -465,9 +435,9 @@
         setTimeout(() => {
           frontContent.classList.add('animate-in');
           setTimeout(() => {
-            // Show front image when typing starts
+            // Show front image when page loads
             if (frontImage) {
-              setTimeout(() => showImage(frontImage), 500);
+              setTimeout(() => showImage(frontImage), 200);
             }
             
             typeText(frontEl, frontText, () => {
@@ -480,9 +450,9 @@
                   setTimeout(() => {
                     backContent.classList.add('animate-in');
                     setTimeout(() => {
-                      // Show back image when typing starts
+                      // Show back image when page loads
                       if (backImage) {
-                        setTimeout(() => showImage(backImage), 500);
+                        setTimeout(() => showImage(backImage), 200);
                       }
                       
                       typeText(backEl, backText, () => {
