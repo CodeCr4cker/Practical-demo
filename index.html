@@ -5,24 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Coder's Journey</title>
   <style>
-    * { box-sizing: border-box; }
-    .page-content { opacity: 0; transform: translateY(-20px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .page-content.animate-in { opacity: 1; transform: translateY(0); }
+    * { 
+      box-sizing: border-box; 
+    }
+    .page-content { 
+     opacity: 0;
+     transform: translateY(-20px);
+     transition: opacity 0.8s ease, transform 0.8s ease; 
+    }
+    .page-content.animate-in { 
+     opacity: 1; transform: translateY(0); 
+    }
     body {
-      margin: 0; display: flex; min-height: 100dvh; perspective: 1000px; font-size: 1rem; overflow: hidden;
+      margin: 0; 
+      display: flex; 
+      min-height: 100dvh; 
+      perspective: 1000px; 
+      font-size: 1rem; 
+      overflow: hidden;
       color: hsl(180 68% 5%);
       background-image: radial-gradient(circle farthest-corner at 50% 50%, hsl(189, 56%, 73%) 30%, hsl(150, 80%, 75%) 100%);
     }
     .book {
-      position: relative; display: flex; margin: auto; width: 40cqmin; height: 550px; pointer-events: auto;
-      transform-style: preserve-3d; transition: translate 1s;
+      position: relative; 
+      display: flex; 
+      margin: auto; 
+      width: 40cqmin; 
+      height: 550px; 
+      pointer-events: auto;
+      transform-style: preserve-3d; 
+      transition: translate 1s;
       translate: calc(min(var(--c), 1) * 50%) 0%; rotate: 1 0 0 30deg; counter-reset: page -1;
     }
-    .neon-typing { color: var(--neon-yellow); text-shadow: var(--neon-shadow-yellow); line-height: 1.4; }
+    .neon-typing { 
+      color: var(--neon-yellow); 
+      text-shadow: var(--neon-shadow-yellow); 
+      line-height: 1.4; 
+    }
     .page {
       --thickness: 4;
-      flex: none; display: flex; width: 100%; font-size: 1.5cqmin; pointer-events: all; user-select: none;
-      transform-style: preserve-3d; transform-origin: left center;
+      flex: none; 
+      display: flex; 
+      width: 100%; 
+      font-size: 1.5cqmin; 
+      pointer-events: all; 
+      user-select: none;
+      transform-style: preserve-3d; 
+      transform-origin: left center;
       transition: transform 1s, rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
       translate: calc(var(--i) * -100%) 0px 0px;
       transform: translateZ( calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * .23cqmin)));
@@ -30,38 +59,98 @@
       box-shadow: 0em .5em 1em -.2em #00000020;
     }
     .front, .back {
-      position: relative; flex: none; width: 100%; backface-visibility: hidden; overflow: hidden; background-color: #fff;
-      display: flex; flex-flow: column wrap; justify-content: flex-start; padding: 2em; border: 1px solid #0002;
+      position: relative; 
+      flex: none; 
+      width: 100%; 
+      backface-visibility: hidden; 
+      overflow: hidden; 
+      background-color: #fff;
+      display: flex; 
+      flex-flow: column wrap; 
+      justify-content: flex-start; 
+      padding: 2em; 
+      border: 1px solid #0002;
     }
     .front::after, .back::after {
-      position: absolute; bottom: 1em; counter-increment: page; content: counter(page) "."; font-size: 0.8em;
+      position: absolute; 
+      bottom: 1em; 
+      counter-increment: page; 
+      content: counter(page) "."; font-size: 0.8em;
     }
-    .front::after { right: 1em; }
-    .back { translate: -100% 0; rotate: 0 1 0 180deg; }
-    .back::after { left: 1em; }
+    .front::after { 
+      right: 1em; 
+    }
+    .back { 
+      translate: -100% 0; 
+      rotate: 0 1 0 180deg; 
+    }
+    .back::after { 
+      left: 1em; 
+    }
     .cover {
       background: radial-gradient(circle farthest-corner at 80% 20%, hsl(150 80% 20% / .3) 0%, hsl(170 60% 10% / .1) 100%),
       hsl(231, 32%, 29%) url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=600&fit=crop") 50% / cover;
       color: hsl(200 30% 98%);
-      pointer-events: auto; display: flex; align-items: center; justify-content: center; text-align: center;
+      pointer-events: auto; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-align: center;
     }
-    .cover::after { content: ""; }
-    .cover-title { font-size: 2em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); margin: 0; }
-    .cover-subtitle { font-size: 1.2em; margin-top: 0.5em; font-style: italic; opacity: 0.9; }
-    h1 { font-size: 1.8em; margin: 0.5em 0; text-align: center; }
-    h2 { font-size: 1.3em; margin: 0.4em 0; text-align: center; }
-    p { font-size: 0.95em; margin: 0.4em 0; }
+    .cover::after { 
+      content: ""; 
+    }
+    .cover-title { 
+      font-size: 2em; 
+      font-weight: bold; 
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7); margin: 0; 
+    }
+    .cover-subtitle { 
+      font-size: 1.2em; 
+      margin-top: 0.5em; 
+      font-style: italic; 
+      opacity: 0.9; 
+    }
+    h1 { 
+      font-size: 1.8em; 
+      margin: 0.5em 0; 
+      text-align: center; 
+    }
+    h2 { 
+      font-size: 1.3em; 
+      margin: 0.4em 0; 
+      text-align: center; 
+    }
+    p { 
+      font-size: 0.95em; 
+      margin: 0.4em 0; 
+    }
     .page-image-container {
-      position: absolute; top: 3rem; left: 50%; transform: translateX(-50%);
-      perspective: 500px; z-index: 10;
+      position: absolute; 
+      top: 3rem; 
+      left: 50%; 
+      transform: translateX(-50%);
+      perspective: 500px; 
+      z-index: 10;
     }
     .page-image {
-      width: 100%; height: 100%; opacity: 0; transform: scale(0) rotateY(0deg);
+      width: 100%; 
+      height: 100%; 
+      opacity: 0; 
+      transform: scale(0) rotateY(0deg);
       transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      transform-style: preserve-3d; object-fit: cover;
+      transform-style: preserve-3d; 
+      object-fit: cover;
     }
-    .page-image.show { opacity: 1; transform: scale(1) rotateY(0deg); animation: rotate3D 4s linear infinite; }
-    .page-image.hide { opacity: 0; transform: scale(0) rotateY(180deg); }
+    .page-image.show { 
+      opacity: 1; 
+      transform: scale(1) rotateY(0deg); 
+      animation: rotate3D 4s linear infinite; 
+    }
+    .page-image.hide { 
+      opacity: 0; 
+      transform: scale(0) rotateY(180deg); 
+    }
     @keyframes rotate3D {
       0% { transform: scale(1) rotateY(0deg) rotateX(0deg); }
       25% { transform: scale(1) rotateY(90deg) rotateX(5deg); }
@@ -69,24 +158,54 @@
       75% { transform: scale(1) rotateY(270deg) rotateX(-5deg); }
       100% { transform: scale(1) rotateY(360deg) rotateX(0deg); }
     }
-    .page-content { padding-top: 140px; }
-    .page-content h2:first-child { margin-top: 0; }
+    .page-content { 
+      padding-top: 140px; 
+    }
+    .page-content h2:first-child { 
+      margin-top: 0; 
+    }
     .audio-controls {
-      position: fixed; top: 20px; right: 20px; z-index: 1000;
-      background: rgba(255, 255, 255, 0.9); padding: 10px;
-      border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed; 
+      top: 20px; 
+      right: 20px; 
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9); 
+      padding: 10px;
+      border-radius: 8px; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       display: none;
     }
     @media (max-width: 768px) {
-      body { font-size: 0.9rem; }
-      .page { font-size: 1.2cqmin; }
-      h1 { font-size: 1.5em; }
-      h2 { font-size: 1.1em; }
-      p { font-size: 0.85em; }
-      .book { height: 200px; }
-      .page-image-container { width: 80px; height: 80px; }
-      .page-content { padding-top: 100px; }
-      .audio-controls { top: 10px; right: 10px; padding: 8px; }
+      body { 
+        font-size: 0.9rem; 
+      }
+      .page { 
+        font-size: 1.2cqmin; 
+      }
+      h1 { 
+        font-size: 1.5em; 
+      }
+      h2 { 
+        font-size: 1.1em; 
+      }
+      p { 
+        font-size: 0.85em; 
+      }
+      .book { 
+        height: 200px; 
+      }
+      .page-image-container { 
+        width: 80px; 
+        height: 80px; 
+      }
+      .page-content { 
+        padding-top: 100px; 
+      }
+      .audio-controls { 
+        top: 10px; 
+        right: 10px; 
+        padding: 8px; 
+      }
     }
   </style>
 </head>
