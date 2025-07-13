@@ -148,8 +148,6 @@
       top: 3rem;
       left: 50%;
       transform: translateX(-50%);
-  /*    width: 120px;
-      height: 120px; */
       perspective: 500px;
       z-index: 10;
     }
@@ -157,8 +155,6 @@
     .page-image {
       width: 100%;
       height: 100%;
-     /* border-radius: 50%;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3); */
       opacity: 0;
       transform: scale(0) rotateY(0deg);
       transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -447,38 +443,47 @@
       };
     }
 
+    // --------- UPDATE: Set language for each page side ---------
     const typingPages = [
       {
         front: "#type1",
         back: "#type2",
-        frontText: "Long ago, in the thick jungle called Agney-Kaand, there was a dangerous mask named AgniVetra. It was made from black stone and burning fire, created by the devil Pavak Daitya. This devil had two flames — one blue that showed lies and one red that showed anger.",
-        backText:"Many people were scared of this mask because whoever wore it could see the truth, but slowly their mind would go mad with the devil's whispers. In that time, there was a brave prince called Divesh Veer from Rajapur. His kingdom was in trouble because of a secret devil-worshipping group. So, Divesh went deep into the jungle and wore the mask to find the truth. He fought Pavak Daitya in a burning ruined place called Bhasm Vatika. In the end, Divesh used the same mask to trap the devil forever. But after that, nobody saw Divesh again. Some people say his voice still comes from the jungle fires, warning everyone not to touch the mask.",
+        frontText: "Long ago, in the thick jungle called Agney-Kaand, there was a dangerous mask named AgniVetra. It was made from black stone and burning fire, created by the devil Pavak Daitya. This mask could give the wearer the power to see hidden truths.",
+        backText: "बहुत समय पहले, घने जंगल 'अग्नेय-काण्ड' में 'अग्निवेत्र' नामक एक रहस्यमयी मुखौटा था। यह काले पत्थर और जलती अग्नि से बना था, जिसे पावक दैत्य ने बनाया था। जिसने भी इसे पहना, वह सत्य देख सकता था, लेकिन धीरे-धीरे उसके मन में दैत्य की फुसफुसाहटें गूंजने लगतीं और वह पागलपन की ओर बढ़ जाता।",
         frontImage: "#img1",
-        backImage: "#img2"
+        backImage: "#img2",
+        frontLang: "en-US",
+        backLang: "hi-IN" // Use Hindi for Chapter 2
       },
       {
         front: "#type3",
         back: "#type4",
-        frontText: "Days turned into weeks, and weeks into months. Alex spent countless hours in front of the screen, learning the language of machines. HTML became poetry, CSS became art, and JavaScript became magic. Each new concept was like discovering a new color in an artist's palette. The more Alex learned, the more beautiful the digital canvas became.",
-        backText: "Soon, Alex's skills began to bloom like flowers in spring. HTML laid the foundation like strong roots, CSS painted the world in vibrant colors, and JavaScript breathed life into static pages. Firebase became the bridge between dreams and reality, allowing creations to live and breathe in the cloud. Each project was a stepping stone across the river of knowledge, leading to greater adventures ahead.",
+        frontText: "Days turned into weeks, and weeks into months. Alex spent countless hours in front of the screen, learning the language of machines. HTML became poetry, CSS became art, and JavaScript became magic.",
+        backText: "Soon, Alex's skills began to bloom like flowers in spring. HTML laid the foundation like strong roots, CSS painted the world in vibrant colors, and JavaScript breathed life into static pages.",
         frontImage: "#img3",
-        backImage: "#img4"
+        backImage: "#img4",
+        frontLang: "en-US",
+        backLang: "en-US"
       },
       {
         front: "#type5",
         back: "#type6",
-        frontText: "One quiet evening, as Alex gazed at the code glowing on the screen, a vision formed in the mind's eye. It wasn't just about building websites or apps—it was about creating solutions that could touch lives, solve problems, and make the world a little bit better. The dream expanded beyond personal success to encompass cybersecurity, artificial intelligence, and ethical hacking—tools to protect and empower others.",
-        backText: "But Alex knew that the greatest adventures are shared ones. The coding community became a second family—developers from around the world who spoke the same language of logic and creativity. Through forums, open-source projects, and collaborative efforts, Alex discovered that the most beautiful code is written not in isolation, but in harmony with others who share the same passion for building the future.",
+        frontText: "One quiet evening, as Alex gazed at the code glowing on the screen, a vision formed in the mind's eye. It wasn't just about building websites or apps—it was about creating solutions, shaping the future.",
+        backText: "But Alex knew that the greatest adventures are shared ones. The coding community became a second family—developers from around the world who spoke the same language of logic and creativity.",
         frontImage: "#img5",
-        backImage: "#img6"
+        backImage: "#img6",
+        frontLang: "en-US",
+        backLang: "en-US"
       },
       {
         front: "#type7",
         back: "#type8",
-        frontText: "Through trial and error, success and failure, Alex learned the most important lesson of all: the journey of learning never ends. Each bug was a puzzle to solve, each error message a teacher in disguise. The philosophy became clear—embrace the unknown, dive into challenges headfirst, and never stop asking 'What if?' because the greatest discoveries come from the courage to explore uncharted territories.",
-        backText: "And so, dear reader, as you reach the end of this chapter, remember that every expert was once a beginner, every master was once a student, and every great achievement started with a single step. Alex's story continues to unfold, filled with new challenges, discoveries, and dreams yet to be realized. The keyboard awaits, the screen glows with potential, and the next adventure is just a click away. Thank you for joining this journey—may your own story be filled with code, creativity, and endless possibilities.",
+        frontText: "Through trial and error, success and failure, Alex learned the most important lesson of all: the journey of learning never ends. Each bug was a puzzle to solve, each error message a teacher in disguise.",
+        backText: "And so, dear reader, as you reach the end of this chapter, remember that every expert was once a beginner, every master was once a student, and every great achievement started with a single step.",
         frontImage: "#img7",
-        backImage: "#img8"
+        backImage: "#img8",
+        frontLang: "en-US",
+        backLang: "en-US"
       }
     ];
 
@@ -505,14 +510,13 @@
       });
     }
 
-    // Enhanced Text-to-Speech with simultaneous typing
-    function speakText(text, onWordSpoken) {
+    // --------- UPDATED: Accept language argument ---------
+    function speakText(text, onWordSpoken, lang = "en-US") {
       if (!audioEnabled || !('speechSynthesis' in window)) return Promise.resolve();
 
       return new Promise((resolve) => {
         speechSynthesis.cancel();
-        
-        // Clean the text for better pronunciation
+
         const cleanText = text
           .replace(/[^\w\s.,!?;:'-]/g, ' ')
           .replace(/\s+/g, ' ')
@@ -524,27 +528,26 @@
         }
 
         const utterance = new SpeechSynthesisUtterance(cleanText);
-        utterance.lang = 'en-US';
+        utterance.lang = lang; // set dynamic lang
         utterance.rate = speechRate;
         utterance.pitch = 1.1;
         utterance.volume = 0.8;
-        
+
         let wordIndex = 0;
         const words = cleanText.split(' ');
-        
-        // Create a more natural word-by-word synchronization
+
         utterance.onboundary = (event) => {
           if (event.name === 'word' && wordIndex < words.length && onWordSpoken) {
             onWordSpoken(wordIndex);
             wordIndex++;
           }
         };
-        
+
         utterance.onend = () => {
           currentUtterance = null;
           resolve();
         };
-        
+
         utterance.onerror = (error) => {
           console.log('Speech error:', error);
           currentUtterance = null;
@@ -556,8 +559,8 @@
       });
     }
 
-    // Enhanced typing with speech synchronization
-    async function typeTextWithSpeech(el, text, callback) {
+    // --------- UPDATED: Accept language argument ---------
+    async function typeTextWithSpeech(el, text, callback, lang = "en-US") {
       if (!audioEnabled) {
         // If audio is disabled, just type normally
         return typeText(el, text, callback);
@@ -565,11 +568,11 @@
 
       isTyping = true;
       el.innerHTML = "";
-      
+
       const words = text.split(' ');
       let currentWordIndex = 0;
       let currentCharIndex = 0;
-      
+
       // Start speech
       const speechPromise = speakText(text, (spokenWordIndex) => {
         // Sync typing with speech
@@ -584,7 +587,7 @@
             }, 20);
           }
         }
-      });
+      }, lang); // pass lang here
 
       // Fallback typing in case speech events don't fire
       const typingInterval = setInterval(() => {
@@ -592,7 +595,7 @@
           clearInterval(typingInterval);
           return;
         }
-        
+
         if (currentCharIndex < text.length) {
           el.innerHTML = text.substring(0, currentCharIndex + 1);
           currentCharIndex++;
@@ -602,12 +605,12 @@
       // Wait for speech to complete
       await speechPromise;
       clearInterval(typingInterval);
-      
+
       // Ensure all text is displayed
       if (isTyping) {
         el.innerHTML = text;
       }
-      
+
       isTyping = false;
       callback && callback();
     }
@@ -616,7 +619,7 @@
     function typeText(el, text, callback) {
       let i = 0;
       el.innerHTML = "";
-      
+
       function typeChar() {
         if (i < text.length && isTyping) {
           el.innerHTML += text[i];
@@ -630,13 +633,14 @@
       typeChar();
     }
 
+    // --------- UPDATED: Pass correct language per page/side ---------
     function startTypingSequence(elBook) {
       let currentPage = 0;
 
       function processPage() {
         if (currentPage >= typingPages.length) return;
 
-        const { front, back, frontText, backText, frontImage, backImage } = typingPages[currentPage];
+        const { front, back, frontText, backText, frontImage, backImage, frontLang, backLang } = typingPages[currentPage];
         const frontEl = document.querySelector(front);
         const backEl = document.querySelector(back);
         const frontContent = frontEl.closest('.front').querySelector('.page-content');
@@ -648,11 +652,11 @@
             if (frontImage) {
               setTimeout(() => showImage(frontImage), 300);
             }
-            
+
             typeTextWithSpeech(frontEl, frontText, () => {
               setTimeout(() => {
                 if (frontImage) hideImage(frontImage);
-                
+
                 setTimeout(() => {
                   elBook.style.setProperty("--c", currentPage + 2);
                   setTimeout(() => {
@@ -661,11 +665,11 @@
                       if (backImage) {
                         setTimeout(() => showImage(backImage), 300);
                       }
-                      
+
                       typeTextWithSpeech(backEl, backText, () => {
                         setTimeout(() => {
                           if (backImage) hideImage(backImage);
-                          
+
                           setTimeout(() => {
                             currentPage++;
                             if (currentPage < typingPages.length) {
@@ -679,12 +683,12 @@
                             }
                           }, 1500);
                         }, 2000);
-                      });
+                      }, backLang || "en-US");
                     }, 400);
                   }, 1000);
                 }, 800);
               }, 1500);
-            });
+            }, frontLang || "en-US");
           }, 400);
         }, 600);
       }
@@ -696,7 +700,7 @@
       hideAllImages();
       isTyping = false;
       speechSynthesis.cancel();
-      
+
       let currentC = parseInt(elBook.style.getPropertyValue("--c")) || 5;
       function closePage() {
         if (currentC > 0) {
